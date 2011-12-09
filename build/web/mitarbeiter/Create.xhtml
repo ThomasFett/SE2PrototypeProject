@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateMitarbeiterTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateMitarbeiterLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{mitarbeiterController.selected.id}" title="#{bundle.CreateMitarbeiterTitle_id}" />
+                    <h:outputLabel value="#{bundle.CreateMitarbeiterLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{mitarbeiterController.selected.name}" title="#{bundle.CreateMitarbeiterTitle_name}" />
+                    <h:outputLabel value="#{bundle.CreateMitarbeiterLabel_abteilung}" for="abteilung" />
+                    <h:inputText id="abteilung" value="#{mitarbeiterController.selected.abteilung}" title="#{bundle.CreateMitarbeiterTitle_abteilung}" />
+                    <h:outputLabel value="#{bundle.CreateMitarbeiterLabel_personalnr}" for="personalnr" />
+                    <h:inputText id="personalnr" value="#{mitarbeiterController.selected.personalnr}" title="#{bundle.CreateMitarbeiterTitle_personalnr}" />
+                    <h:outputLabel value="#{bundle.CreateMitarbeiterLabel_myMitarbeiterbild}" for="myMitarbeiterbild" />
+                    <h:selectOneMenu id="myMitarbeiterbild" value="#{mitarbeiterController.selected.myMitarbeiterbild}" title="#{bundle.CreateMitarbeiterTitle_myMitarbeiterbild}" >
+                        <f:selectItems value="#{mitarbeiterbildController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{mitarbeiterController.create}" value="#{bundle.CreateMitarbeiterSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{mitarbeiterController.prepareList}" value="#{bundle.CreateMitarbeiterShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.CreateMitarbeiterIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMitarbeiterbildTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditMitarbeiterbildLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{mitarbeiterbildController.selected.id}" title="#{bundle.EditMitarbeiterbildTitle_id}" />
+                    <h:outputLabel value="#{bundle.EditMitarbeiterbildLabel_url}" for="url" />
+                    <h:inputText id="url" value="#{mitarbeiterbildController.selected.url}" title="#{bundle.EditMitarbeiterbildTitle_url}" />
+                    <h:outputLabel value="#{bundle.EditMitarbeiterbildLabel_myMitarbeiter}" for="myMitarbeiter" />
+                    <h:selectOneMenu id="myMitarbeiter" value="#{mitarbeiterbildController.selected.myMitarbeiter}" title="#{bundle.EditMitarbeiterbildTitle_myMitarbeiter}" >
+                        <f:selectItems value="#{mitarbeiterController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{mitarbeiterbildController.update}" value="#{bundle.EditMitarbeiterbildSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditMitarbeiterbildViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{mitarbeiterbildController.prepareList}" value="#{bundle.EditMitarbeiterbildShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditMitarbeiterbildIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditBeitragTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditBeitragLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{beitragController.selected.id}" title="#{bundle.EditBeitragTitle_id}" />
+                    <h:outputLabel value="#{bundle.EditBeitragLabel_datum}" for="datum" />
+                    <h:inputText id="datum" value="#{beitragController.selected.datum}" title="#{bundle.EditBeitragTitle_datum}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditBeitragLabel_bewertung}" for="bewertung" />
+                    <h:inputText id="bewertung" value="#{beitragController.selected.bewertung}" title="#{bundle.EditBeitragTitle_bewertung}" />
+                    <h:outputLabel value="#{bundle.EditBeitragLabel_titel}" for="titel" />
+                    <h:inputText id="titel" value="#{beitragController.selected.titel}" title="#{bundle.EditBeitragTitle_titel}" />
+                    <h:outputLabel value="#{bundle.EditBeitragLabel_beschreibung}" for="beschreibung" />
+                    <h:inputText id="beschreibung" value="#{beitragController.selected.beschreibung}" title="#{bundle.EditBeitragTitle_beschreibung}" />
+                    <h:outputLabel value="#{bundle.EditBeitragLabel_autor}" for="autor" />
+                    <h:selectOneMenu id="autor" value="#{beitragController.selected.autor}" title="#{bundle.EditBeitragTitle_autor}" >
+                        <f:selectItems value="#{mitarbeiterController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{beitragController.update}" value="#{bundle.EditBeitragSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditBeitragViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{beitragController.prepareList}" value="#{bundle.EditBeitragShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditBeitragIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

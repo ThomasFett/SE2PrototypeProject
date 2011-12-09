@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListBeitragTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListBeitragEmpty}" rendered="#{beitragController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{beitragController.items.rowCount > 0}">
+                    <h:outputText value="#{beitragController.pagination.pageFirstItem + 1}..#{beitragController.pagination.pageLastItem + 1}/#{beitragController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{beitragController.previous}" value="#{bundle.Previous} #{beitragController.pagination.pageSize}" rendered="#{beitragController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{beitragController.next}" value="#{bundle.Next} #{beitragController.pagination.pageSize}" rendered="#{beitragController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{beitragController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBeitragTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBeitragTitle_datum}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datum}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBeitragTitle_bewertung}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.bewertung}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBeitragTitle_titel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.titel}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBeitragTitle_beschreibung}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.beschreibung}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListBeitragTitle_autor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.autor}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{beitragController.prepareView}" value="#{bundle.ListBeitragViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{beitragController.prepareEdit}" value="#{bundle.ListBeitragEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{beitragController.destroy}" value="#{bundle.ListBeitragDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{beitragController.prepareCreate}" value="#{bundle.ListBeitragCreateLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ListBeitragIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

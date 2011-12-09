@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditIdeeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditIdeeLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{ideeController.selected.id}" title="#{bundle.EditIdeeTitle_id}" />
+                    <h:outputLabel value="#{bundle.EditIdeeLabel_datum}" for="datum" />
+                    <h:inputText id="datum" value="#{ideeController.selected.datum}" title="#{bundle.EditIdeeTitle_datum}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditIdeeLabel_bewertung}" for="bewertung" />
+                    <h:inputText id="bewertung" value="#{ideeController.selected.bewertung}" title="#{bundle.EditIdeeTitle_bewertung}" />
+                    <h:outputLabel value="#{bundle.EditIdeeLabel_titel}" for="titel" />
+                    <h:inputText id="titel" value="#{ideeController.selected.titel}" title="#{bundle.EditIdeeTitle_titel}" />
+                    <h:outputLabel value="#{bundle.EditIdeeLabel_beschreibung}" for="beschreibung" />
+                    <h:inputText id="beschreibung" value="#{ideeController.selected.beschreibung}" title="#{bundle.EditIdeeTitle_beschreibung}" />
+                    <h:outputLabel value="#{bundle.EditIdeeLabel_autor}" for="autor" />
+                    <h:selectOneMenu id="autor" value="#{ideeController.selected.autor}" title="#{bundle.EditIdeeTitle_autor}" >
+                        <f:selectItems value="#{mitarbeiterController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{ideeController.update}" value="#{bundle.EditIdeeSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditIdeeViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{ideeController.prepareList}" value="#{bundle.EditIdeeShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditIdeeIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

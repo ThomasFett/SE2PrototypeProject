@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewIdeeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewIdeeLabel_id}"/>
+                    <h:outputText value="#{ideeController.selected.id}" title="#{bundle.ViewIdeeTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewIdeeLabel_datum}"/>
+                    <h:outputText value="#{ideeController.selected.datum}" title="#{bundle.ViewIdeeTitle_datum}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewIdeeLabel_bewertung}"/>
+                    <h:outputText value="#{ideeController.selected.bewertung}" title="#{bundle.ViewIdeeTitle_bewertung}"/>
+                    <h:outputText value="#{bundle.ViewIdeeLabel_titel}"/>
+                    <h:outputText value="#{ideeController.selected.titel}" title="#{bundle.ViewIdeeTitle_titel}"/>
+                    <h:outputText value="#{bundle.ViewIdeeLabel_beschreibung}"/>
+                    <h:outputText value="#{ideeController.selected.beschreibung}" title="#{bundle.ViewIdeeTitle_beschreibung}"/>
+                    <h:outputText value="#{bundle.ViewIdeeLabel_autor}"/>
+                    <h:outputText value="#{ideeController.selected.autor}" title="#{bundle.ViewIdeeTitle_autor}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ideeController.destroyAndView}" value="#{bundle.ViewIdeeDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewIdeeEditLink}"/>
+                <br />
+                <h:commandLink action="#{ideeController.prepareCreate}" value="#{bundle.ViewIdeeCreateLink}" />
+                <br />
+                <h:commandLink action="#{ideeController.prepareList}" value="#{bundle.ViewIdeeShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewIdeeIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

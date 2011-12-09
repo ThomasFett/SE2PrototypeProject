@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewBeitragTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewBeitragLabel_id}"/>
+                    <h:outputText value="#{beitragController.selected.id}" title="#{bundle.ViewBeitragTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewBeitragLabel_datum}"/>
+                    <h:outputText value="#{beitragController.selected.datum}" title="#{bundle.ViewBeitragTitle_datum}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewBeitragLabel_bewertung}"/>
+                    <h:outputText value="#{beitragController.selected.bewertung}" title="#{bundle.ViewBeitragTitle_bewertung}"/>
+                    <h:outputText value="#{bundle.ViewBeitragLabel_titel}"/>
+                    <h:outputText value="#{beitragController.selected.titel}" title="#{bundle.ViewBeitragTitle_titel}"/>
+                    <h:outputText value="#{bundle.ViewBeitragLabel_beschreibung}"/>
+                    <h:outputText value="#{beitragController.selected.beschreibung}" title="#{bundle.ViewBeitragTitle_beschreibung}"/>
+                    <h:outputText value="#{bundle.ViewBeitragLabel_autor}"/>
+                    <h:outputText value="#{beitragController.selected.autor}" title="#{bundle.ViewBeitragTitle_autor}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{beitragController.destroyAndView}" value="#{bundle.ViewBeitragDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewBeitragEditLink}"/>
+                <br />
+                <h:commandLink action="#{beitragController.prepareCreate}" value="#{bundle.ViewBeitragCreateLink}" />
+                <br />
+                <h:commandLink action="#{beitragController.prepareList}" value="#{bundle.ViewBeitragShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewBeitragIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

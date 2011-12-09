@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListMitarbeiterbildTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListMitarbeiterbildEmpty}" rendered="#{mitarbeiterbildController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{mitarbeiterbildController.items.rowCount > 0}">
+                    <h:outputText value="#{mitarbeiterbildController.pagination.pageFirstItem + 1}..#{mitarbeiterbildController.pagination.pageLastItem + 1}/#{mitarbeiterbildController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{mitarbeiterbildController.previous}" value="#{bundle.Previous} #{mitarbeiterbildController.pagination.pageSize}" rendered="#{mitarbeiterbildController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{mitarbeiterbildController.next}" value="#{bundle.Next} #{mitarbeiterbildController.pagination.pageSize}" rendered="#{mitarbeiterbildController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{mitarbeiterbildController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMitarbeiterbildTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMitarbeiterbildTitle_url}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.url}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMitarbeiterbildTitle_myMitarbeiter}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.myMitarbeiter}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{mitarbeiterbildController.prepareView}" value="#{bundle.ListMitarbeiterbildViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{mitarbeiterbildController.prepareEdit}" value="#{bundle.ListMitarbeiterbildEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{mitarbeiterbildController.destroy}" value="#{bundle.ListMitarbeiterbildDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{mitarbeiterbildController.prepareCreate}" value="#{bundle.ListMitarbeiterbildCreateLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ListMitarbeiterbildIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

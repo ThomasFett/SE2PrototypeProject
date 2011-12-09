@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewKommentarTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewKommentarLabel_beitrag}"/>
+                    <h:outputText value="#{kommentarController.selected.beitrag}" title="#{bundle.ViewKommentarTitle_beitrag}"/>
+                    <h:outputText value="#{bundle.ViewKommentarLabel_id}"/>
+                    <h:outputText value="#{kommentarController.selected.id}" title="#{bundle.ViewKommentarTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewKommentarLabel_datum}"/>
+                    <h:outputText value="#{kommentarController.selected.datum}" title="#{bundle.ViewKommentarTitle_datum}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewKommentarLabel_bewertung}"/>
+                    <h:outputText value="#{kommentarController.selected.bewertung}" title="#{bundle.ViewKommentarTitle_bewertung}"/>
+                    <h:outputText value="#{bundle.ViewKommentarLabel_titel}"/>
+                    <h:outputText value="#{kommentarController.selected.titel}" title="#{bundle.ViewKommentarTitle_titel}"/>
+                    <h:outputText value="#{bundle.ViewKommentarLabel_beschreibung}"/>
+                    <h:outputText value="#{kommentarController.selected.beschreibung}" title="#{bundle.ViewKommentarTitle_beschreibung}"/>
+                    <h:outputText value="#{bundle.ViewKommentarLabel_autor}"/>
+                    <h:outputText value="#{kommentarController.selected.autor}" title="#{bundle.ViewKommentarTitle_autor}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{kommentarController.destroyAndView}" value="#{bundle.ViewKommentarDestroyLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="Edit" value="#{bundle.ViewKommentarEditLink}"/>
+                <br />
+                <h:commandLink action="#{kommentarController.prepareCreate}" value="#{bundle.ViewKommentarCreateLink}" />
+                <br />
+                <h:commandLink action="#{kommentarController.prepareList}" value="#{bundle.ViewKommentarShowAllLink}"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.ViewKommentarIndexLink}" action="/index" immediate="true" />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

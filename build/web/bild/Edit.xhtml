@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditBildTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditBildLabel_url}" for="url" />
+                    <h:inputText id="url" value="#{bildController.selected.url}" title="#{bundle.EditBildTitle_url}" />
+                    <h:outputLabel value="#{bundle.EditBildLabel_datum}" for="datum" />
+                    <h:inputText id="datum" value="#{bildController.selected.datum}" title="#{bundle.EditBildTitle_datum}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditBildLabel_laenge}" for="laenge" />
+                    <h:inputText id="laenge" value="#{bildController.selected.laenge}" title="#{bundle.EditBildTitle_laenge}" />
+                    <h:outputLabel value="#{bundle.EditBildLabel_breite}" for="breite" />
+                    <h:inputText id="breite" value="#{bildController.selected.breite}" title="#{bundle.EditBildTitle_breite}" />
+                    <h:outputLabel value="#{bundle.EditBildLabel_titel}" for="titel" />
+                    <h:inputText id="titel" value="#{bildController.selected.titel}" title="#{bundle.EditBildTitle_titel}" />
+                    <h:outputLabel value="#{bundle.EditBildLabel_beitrag}" for="beitrag" />
+                    <h:selectOneMenu id="beitrag" value="#{bildController.selected.beitrag}" title="#{bundle.EditBildTitle_beitrag}" >
+                        <f:selectItems value="#{beitragController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditBildLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{bildController.selected.id}" title="#{bundle.EditBildTitle_id}" />
+                </h:panelGrid>
+                <h:commandLink action="#{bildController.update}" value="#{bundle.EditBildSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="View" value="#{bundle.EditBildViewLink}" immediate="true"/>
+                <br />
+                <h:commandLink action="#{bildController.prepareList}" value="#{bundle.EditBildShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:commandLink value="#{bundle.EditBildIndexLink}" action="/index" immediate="true" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
