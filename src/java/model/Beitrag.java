@@ -141,4 +141,9 @@ public class Beitrag implements Serializable {
     public void setAutor(Mitarbeiter autor) {
         this.autor = autor;
     }
+    
+    @Override
+    public String toString(){
+        return "" + getTitel();
+    }
 }

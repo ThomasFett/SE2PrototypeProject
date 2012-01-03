@@ -95,7 +95,7 @@ public class Mitarbeiter implements Serializable {
     
     @Override
     public String toString(){
-        return ""+ this.getId();
+        return ""+ this.getName() + ", Persnr.: " + this.getPersonalnr();
     }
 
     /**

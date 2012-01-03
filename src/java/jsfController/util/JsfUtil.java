@@ -20,7 +20,13 @@ public class JsfUtil {
         for (Object x : entities) {
             items[i++] = new SelectItem(x, x.toString());
         }
-        return items;
+      //  System.out.println("items length: " + items.length);
+       // for (Object o:items) {
+        //            System.out.println(o.getClass());
+
+       // }
+
+        return items;   
     }
 
     public static void addErrorMessage(Exception ex, String defaultMsg) {
