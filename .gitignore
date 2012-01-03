@@ -1,0 +1,6 @@
+build/web/WEB-INF/classes/META-INF/persistence.xml
+nbproject/
+build-impl.xml~
+*.class
+.DS_Store
+setup/glassfish-resources.xml
