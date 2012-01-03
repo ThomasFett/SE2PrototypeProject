@@ -111,4 +111,15 @@ public class Mitarbeiter implements Serializable {
     public void setMyMitarbeiterbild(Mitarbeiterbild myMitarbeiterbild) {
         this.myMitarbeiterbild = myMitarbeiterbild;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Mitarbeiter) {
+            Mitarbeiter ob = (Mitarbeiter) obj;
+            if (ob.getId() == this.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
