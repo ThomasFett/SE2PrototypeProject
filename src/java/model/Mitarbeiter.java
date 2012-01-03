@@ -122,4 +122,16 @@ public class Mitarbeiter implements Serializable {
         }
         return false;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 71 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 71 * hash + (this.abteilung != null ? this.abteilung.hashCode() : 0);
+        hash = 71 * hash + this.personalnr;
+        hash = 71 * hash + (this.myBeitraege != null ? this.myBeitraege.hashCode() : 0);
+        hash = 71 * hash + (this.myMitarbeiterbild != null ? this.myMitarbeiterbild.hashCode() : 0);
+        return hash;
+    }
 }

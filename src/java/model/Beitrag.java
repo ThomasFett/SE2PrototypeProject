@@ -146,4 +146,29 @@ public class Beitrag implements Serializable {
     public String toString(){
         return "" + getTitel();
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Beitrag) {
+            Beitrag ob = (Beitrag) obj;
+            if (ob.getId() == this.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 59 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 59 * hash + (this.datum != null ? this.datum.hashCode() : 0);
+        hash = 59 * hash + this.bewertung;
+        hash = 59 * hash + (this.titel != null ? this.titel.hashCode() : 0);
+        hash = 59 * hash + (this.beschreibung != null ? this.beschreibung.hashCode() : 0);
+        hash = 59 * hash + (this.myKommentare != null ? this.myKommentare.hashCode() : 0);
+        hash = 59 * hash + (this.myBilder != null ? this.myBilder.hashCode() : 0);
+        hash = 59 * hash + (this.autor != null ? this.autor.hashCode() : 0);
+        return hash;
+    }
 }

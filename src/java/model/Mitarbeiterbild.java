@@ -86,4 +86,24 @@ public class Mitarbeiterbild implements Serializable{
         return "" + this.getName();
     }
     
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Mitarbeiterbild) {
+            Mitarbeiterbild ob = (Mitarbeiterbild) obj;
+            if (ob.getId() == this.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 67 * hash + (this.url != null ? this.url.hashCode() : 0);
+        hash = 67 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 67 * hash + (this.myMitarbeiter != null ? this.myMitarbeiter.hashCode() : 0);
+        return hash;
+    }
 }
