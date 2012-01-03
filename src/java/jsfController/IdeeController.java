@@ -76,7 +76,7 @@ public class IdeeController implements Serializable {
     public String prepareCreate() {
         current = new Idee();
         selectedItemIndex = -1;
-        return "Create";
+        return "List";
     }
 
     public String create() {

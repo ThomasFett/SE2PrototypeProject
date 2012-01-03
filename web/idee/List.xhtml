@@ -11,7 +11,38 @@
         
         <ui:define name="body">
             
-            <ui:include src="Create.xhtml"></ui:include>
+            <h:form>
+                <h:panelGrid columns="2">
+                   <!-- <h:outputLabel value="#{bundle.CreateIdeeLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{ideeController.selected.id}" title="#{bundle.CreateIdeeTitle_id}" /> -->
+                    <h:outputLabel value="#{bundle.CreateIdeeLabel_datum}" for="datum" />
+                    <h:inputText id="datum" value="#{ideeController.selected.datum}" title="#{bundle.CreateIdeeTitle_datum}" >
+                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                    </h:inputText>
+                    <!-- <h:outputLabel value="#{bundle.CreateIdeeLabel_bewertung}" for="bewertung" />
+                    <h:inputText id="bewertung" value="#{ideeController.selected.bewertung}" title="#{bundle.CreateIdeeTitle_bewertung}" /> -->
+                    <h:outputLabel value="#{bundle.CreateIdeeLabel_titel}" for="titel" />
+                    <h:inputText id="titel" value="#{ideeController.selected.titel}" title="#{bundle.CreateIdeeTitle_titel}" />
+                    <h:outputLabel value="#{bundle.CreateIdeeLabel_beschreibung}" for="beschreibung" />
+                    <h:inputText id="beschreibung" value="#{ideeController.selected.beschreibung}" title="#{bundle.CreateIdeeTitle_beschreibung}" />
+                    <h:outputLabel value="#{bundle.CreateIdeeLabel_autor}" for="autor" />
+                    <h:selectOneMenu id="autor" value="#{ideeController.selected.autor}" title="#{bundle.CreateIdeeTitle_autor}" >
+                        <f:selectItems value="#{mitarbeiterController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ideeController.create}" value="#{bundle.CreateIdeeSaveLink}" />
+                <br />
+                <br />
+                <!-- konnte nicht auskommentiert werden -->
+                <h:commandLink action="#{ideeController.prepareList}" value="#{bundle.CreateIdeeShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <!-- den index link hier habe ich behalten, da der untere nicht funktionierte -->
+                <h:commandLink value="#{bundle.CreateIdeeIndexLink}" action="/index" immediate="true" />
+                <br />
+                <br />
+            </h:form>
             
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
@@ -34,7 +65,7 @@
                                 <h:outputText value="#{bundle.ListIdeeTitle_datum}"/>
                             </f:facet>
                             <h:outputText value="#{item.datum}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="dd.MM.yyyy" />
                             </h:outputText>
                         </h:column>
                         <h:column>
@@ -74,10 +105,11 @@
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
+                <!-- konnte nicht auskommentiert werden! -->
                 <h:commandLink action="#{ideeController.prepareCreate}" value="#{bundle.ListIdeeCreateLink}"/>
                 <br />
                 <br />
-                <h:commandLink value="#{bundle.ListIdeeIndexLink}" action="/list" immediate="true" />
+                <!-- <h:commandLink value="#{bundle.ListIdeeIndexLink}" action="/list" immediate="true" /> -->
             </h:form>
         </ui:define>
     </ui:composition>
