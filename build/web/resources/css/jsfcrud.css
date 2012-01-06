@@ -2,10 +2,21 @@ root {
     display: block;
 }
 
+html,body {
+    height:100%;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     color: #3a4f54;
-    background-color: #dfecf1;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+    background: linear-gradient(top, #ffffff 0%,#e5e5e5 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
     font-size: small;
 }
 
@@ -20,18 +31,7 @@ table {
 form.jsfcrud_list_form th, td th {
     font-size: x-small;
     color: #4e6a71;
-    border-top-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-    border-right-style: solid;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-top-color: #b2d5d6;
-    border-bottom-color: #b2d5d6;
-    border-left-color: #90b4bd;
-    border-right-color: #90b4bd;
+    border:0px;
     letter-spacing: 3px;
     text-align: left;
     padding-top: 6px;
@@ -45,23 +45,7 @@ td {
     vertical-align: top;
     padding-bottom: 8px;
     font-size: small;
-}
-
-form.jsfcrud_list_form td, td td {
-    border-top-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-    border-right-style: solid;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-top-color: #b2d5d6;
-    border-bottom-color: #b2d5d6;
-    border-left-color: #b2d5d6;
-    border-right-color: #b2d5d6;
-    vertical-align: baseline;
-    padding-bottom: 0px;
+    border:0px;
 }
 
 tr.jsfcrud_odd_row {
@@ -79,4 +63,68 @@ tr.jsfcrud_even_row {
     position: absolute;
     left: 50%;
     top: 50%;
+}
+
+.create form {
+    background:#CCC;
+    border:1px solid #000;
+    width:350px;
+    height:200px;
+    padding:10px;
+    font-weight: bold;
+    float: left;
+    margin: 0 50px 0 30px;
+}
+.create form table tr td:first-Child {
+    width:110px;
+}
+.create form input {
+    width:209px;
+}
+.create form textarea {
+    width:212px;
+}
+
+.create form a{
+    background: none repeat scroll 0 0 #EEEEEE;
+    border: 1px solid #555555;
+    bottom: 14px;
+    color: #000000;
+    display: block;
+    height: 23px;
+    left: 206px;
+    padding-top: 10px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    width: 120px;
+}
+
+
+.ideas form {
+    overflow: hidden;
+}
+.idea table {
+    width:100%;
+}
+.idea table tr {
+    display:block;
+    margin-bottom: 20px;
+}
+.idea table tr td{
+    display:inline;
+    padding:5px;
+}
+.idea table tr td:nth-child(3) {
+    display:block;
+    font-size: 16px;
+    font-weight:bold;
+}
+.idea table tr td:nth-child(4) {
+    display:block;
+}
+
+.idea table tr td:first-Child {
+    font-weight: bold;
+    width:80px;
 }

@@ -1,11 +1,15 @@
 package jsfController;
 
+import java.text.ParseException;
 import model.Idee;
 import jsfController.util.JsfUtil;
 import jsfController.util.PaginationHelper;
 import dao.IdeeFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -73,7 +77,7 @@ public class IdeeController implements Serializable {
         return "View";
     }
 
-    public String prepareCreate() {
+    public String prepareCreate() throws ParseException {
         current = new Idee();
         selectedItemIndex = -1;
         return "List";
@@ -81,7 +85,11 @@ public class IdeeController implements Serializable {
 
     public String create() {
         try {
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            Date date = new Date();
+            current.setDatum(dateFormat.parse(dateFormat.format(date)));
             getFacade().create(current);
+            recreateModel();
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("IdeeCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -157,6 +165,10 @@ public class IdeeController implements Serializable {
             items = getPagination().createPageDataModel();
         }
         return items;
+    }
+    
+    public Idee getCurrent() {
+        return (Idee) getItems().getRowData();
     }
 
     private void recreateModel() {

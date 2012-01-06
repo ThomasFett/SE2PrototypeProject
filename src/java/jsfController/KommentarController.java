@@ -156,6 +156,7 @@ public class KommentarController implements Serializable {
         if (items == null) {
             items = getPagination().createPageDataModel();
         }
+        
         return items;
     }
 
@@ -176,11 +177,13 @@ public class KommentarController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        System.out.println("aaaa");
+        return JsfUtil.getSelectItems(ejbFacade.findById(100), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        System.out.println("aaaa");
+        return JsfUtil.getSelectItems(ejbFacade.findById(100), true);
     }
 
     @FacesConverter(forClass = Kommentar.class)
