@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ice="http://www.icesoft.com/icefaces/component">
+      xmlns:f="http://java.sun.com/jsf/core">
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
             <h:outputText value="Ideenportal"></h:outputText>
@@ -58,10 +57,13 @@
                                 <h:outputText value="Bewertung:"/>
                                 <h:outputText value="#{item.bewertung}"/>
                             </h:column>
-                            <!--
+                            
                             <h:column>
                                 <div class="comments">
-                                    <h:dataTable value="#{kommentarController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rules="all">
+                                    
+                                    
+                                    <!-- idee c-->
+                                    <!--<h:dataTable value="#{kommentarController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rules="all">
                                         <h:column>
                                             <h:outputText value="#{item.datum}">
                                                 <f:convertDateTime pattern="dd.MM.yyyy" />
@@ -80,10 +82,10 @@
                                             <h:outputText value="Bewertung:"/>
                                             <h:outputText value="#{item.bewertung}"/>
                                         </h:column>                        
-                                    </h:dataTable>
+                                    </h:dataTable>-->
                                 </div>
                             </h:column>
-                            -->
+                            
                         </h:dataTable>
                     </div>
                     

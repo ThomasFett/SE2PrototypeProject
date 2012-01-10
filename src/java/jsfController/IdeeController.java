@@ -6,6 +6,7 @@ import jsfController.util.JsfUtil;
 import jsfController.util.PaginationHelper;
 import dao.IdeeFacade;
 
+import dao.KommentarFacade;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,15 +22,19 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import model.Kommentar;
 
 @ManagedBean(name = "ideeController")
 @SessionScoped
 public class IdeeController implements Serializable {
 
     private Idee current;
+    private Kommentar comment;
     private DataModel items = null;
+    private DataModel kommentarItems = null;
     @EJB
     private dao.IdeeFacade ejbFacade;
+    private dao.KommentarFacade kommentarFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -46,6 +51,10 @@ public class IdeeController implements Serializable {
 
     private IdeeFacade getFacade() {
         return ejbFacade;
+    }
+    
+    private KommentarFacade getKommentarFacade() {
+        return kommentarFacade;
     }
 
     public PaginationHelper getPagination() {
@@ -79,6 +88,12 @@ public class IdeeController implements Serializable {
 
     public String prepareCreate() throws ParseException {
         current = new Idee();
+        selectedItemIndex = -1;
+        return "List";
+    }
+    
+    public String prepareKommentarCreate() {
+        comment = new Kommentar();
         selectedItemIndex = -1;
         return "List";
     }
@@ -230,5 +245,34 @@ public class IdeeController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + IdeeController.class.getName());
             }
         }
+        
+    }
+    
+    public Kommentar getKommentar() {
+        comment = new Kommentar();
+        return comment;
+    }
+    
+    public String createKommentar() {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            Date date = new Date();
+            comment.setDatum(dateFormat.parse(dateFormat.format(date)));
+            getKommentarFacade().create(comment);
+            recreateModel();
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("IdeeCreated"));
+            return prepareKommentarCreate();
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
+    }
+    public String prepareKommentarView() {
+        comment = (Kommentar) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        return "View";
+    }
+    public Kommentar getCurrentKommentar() {
+        return (Kommentar) getItems().getRowData();
     }
 }

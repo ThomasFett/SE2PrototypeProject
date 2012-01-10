@@ -17,6 +17,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import model.Kommentar;
 
 @ManagedBean(name = "beitragController")
 @SessionScoped
@@ -24,8 +25,10 @@ public class BeitragController implements Serializable {
 
     private Beitrag current;
     private DataModel items = null;
+    private Kommentar comment;
     @EJB
     private dao.BeitragFacade ejbFacade;
+    private dao.KommentarFacade kommentarFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -222,5 +225,10 @@ public class BeitragController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + BeitragController.class.getName());
             }
         }
+    }
+    
+    public Kommentar getKommentar() {
+        comment = new Kommentar();
+        return comment;
     }
 }

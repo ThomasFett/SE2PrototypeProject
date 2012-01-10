@@ -26,6 +26,7 @@ public class KommentarController implements Serializable {
     private DataModel items = null;
     @EJB
     private dao.KommentarFacade ejbFacade;
+    private dao.BeitragFacade beitrag;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -55,6 +56,7 @@ public class KommentarController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
+                    System.out.println("da");
                     return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
@@ -178,12 +180,12 @@ public class KommentarController implements Serializable {
 
     public SelectItem[] getItemsAvailableSelectMany() {
         System.out.println("aaaa");
-        return JsfUtil.getSelectItems(ejbFacade.findById(100), false);
+        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
         System.out.println("aaaa");
-        return JsfUtil.getSelectItems(ejbFacade.findById(100), true);
+        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
     @FacesConverter(forClass = Kommentar.class)
