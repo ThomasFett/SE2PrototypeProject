@@ -3,7 +3,9 @@ package model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,13 +25,13 @@ public class Beitrag implements Serializable {
     private int bewertung;
     private String titel;
     private String beschreibung;
-    @OneToMany
+    @OneToMany(fetch= FetchType.EAGER, mappedBy = "beitrag",cascade = CascadeType.ALL)
     private Collection<Kommentar> myKommentare;
     @OneToMany
     private Collection<Bild> myBilder;
     @ManyToOne
     private Mitarbeiter autor;
-
+    
     /**
      * @return the id
      */
@@ -144,7 +146,7 @@ public class Beitrag implements Serializable {
     
     @Override
     public String toString(){
-        return "" + getTitel();
+        return "<b>schmuuu:</b> "+ getAutor() + getTitel();
     }
     
     @Override

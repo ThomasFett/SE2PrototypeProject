@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
             <h:outputText value="Ideenportal"></h:outputText>
@@ -61,28 +62,23 @@
                             <h:column>
                                 <div class="comments">
                                     
+                                    <h:outputText value="#{item.myKommentare}"/>
+                                    <c:if test="#{empty item.titel}">
+                                    JAAAA    
+                                    </c:if>
+                                    <h:outputText value="#{item.myKommentare}"/>
                                     
-                                    <!-- idee c-->
-                                    <!--<h:dataTable value="#{kommentarController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rules="all">
-                                        <h:column>
-                                            <h:outputText value="#{item.datum}">
-                                                <f:convertDateTime pattern="dd.MM.yyyy" />
-                                            </h:outputText>
-                                        </h:column>
-                                        <h:column>
-                                            <h:outputText value="#{item.autor.name}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <h:outputText value="#{item.titel}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <h:outputText value="#{item.beschreibung}"/>
-                                        </h:column>
-                                        <h:column>
-                                            <h:outputText value="Bewertung:"/>
-                                            <h:outputText value="#{item.bewertung}"/>
-                                        </h:column>                        
-                                    </h:dataTable>-->
+                                    <c:forEach var="a" items="#{item.myKommentare}">
+                                        <div class="kommentar">
+                                            <h1><h:outputText value="#{a.titel}" /></h1>
+                                            <p class="kommentar-body">
+                                                <h:outputText value="#{a.beschreibung}" />
+                                            </p>
+                                            <p class="kommentar-footer">
+                                                <h:outputText value="Von #{a.autor} am #{a.datum}" />
+                                            </p>
+                                        </div>
+                                    </c:forEach>
                                 </div>
                             </h:column>
                             

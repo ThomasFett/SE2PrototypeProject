@@ -79,21 +79,16 @@ public class IdeeController implements Serializable {
         recreateModel();
         return "List";
     }
-
+    
     public String prepareView() {
         current = (Idee) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
+
     public String prepareCreate() throws ParseException {
         current = new Idee();
-        selectedItemIndex = -1;
-        return "List";
-    }
-    
-    public String prepareKommentarCreate() {
-        comment = new Kommentar();
         selectedItemIndex = -1;
         return "List";
     }
@@ -253,6 +248,12 @@ public class IdeeController implements Serializable {
         return comment;
     }
     
+    public String prepareKommentarCreate() {
+        comment = new Kommentar();
+        selectedItemIndex = -1;
+        return "List";
+    }
+    
     public String createKommentar() {
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -260,19 +261,13 @@ public class IdeeController implements Serializable {
             comment.setDatum(dateFormat.parse(dateFormat.format(date)));
             getKommentarFacade().create(comment);
             recreateModel();
+            current.getMyKommentare().add(comment);
+            getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("IdeeCreated"));
             return prepareKommentarCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
-    }
-    public String prepareKommentarView() {
-        comment = (Kommentar) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
-    }
-    public Kommentar getCurrentKommentar() {
-        return (Kommentar) getItems().getRowData();
     }
 }
