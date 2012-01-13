@@ -71,7 +71,6 @@ public class BeitragController implements Serializable {
     }
 
     public String prepareView() {
-        System.out.println("sdasdads");
         current = (Beitrag) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
@@ -162,7 +161,7 @@ public class BeitragController implements Serializable {
         if (items == null) {
             items = getPagination().createPageDataModel();
         }
-        System.out.println("ssad");
+        recreateModel();
         return items;
     }
 

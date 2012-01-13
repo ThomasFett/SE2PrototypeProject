@@ -57,25 +57,47 @@
                             <h:column>
                                 <h:outputText value="Bewertung:"/>
                                 <h:outputText value="#{item.bewertung}"/>
+                                <a href="#" class="createComment">Kommentieren</a>
                             </h:column>
                             
                             <h:column>
                                 <div class="comments">
                                     
                                     <ui:repeat value="${item.myKommentare}" var="comment">
-                                        <h3><h:outputText value="#{comment.titel}" /></h3>
+                                        <h3><h:outputText value="Von #{comment.autor}" /> <span>-  am <h:outputText value="#{comment.datum}" /></span></h3>
                                         <p class="kommentar-body">
                                             <h:outputText value="#{comment.beschreibung}" />
                                         </p>
-                                        <p class="kommentar-footer">
-                                            <h:outputText value="Von #{comment.autor} am #{comment.datum}" />
-                                        </p>
                                     </ui:repeat>
-                                    
                                 </div>
                             </h:column>
-                            
+                            <h:column>
+                                <div class="createCommentForm">
+                                    <input type="hidden" name="commentId" value="#{item.id}" class="ideaId" />
+                                    <h:form>
+                                        <h:panelGrid columns="2">
+                                            <h:outputLabel value="#{bundle.CreateKommentarLabel_beitrag}" for="beitrag" />
+                                            <h:selectOneMenu id="beitrag" value="#{kommentarController.selected.beitrag}" title="#{bundle.CreateKommentarTitle_beitrag}" >
+                                                <f:selectItems value="#{beitragController.itemsAvailableSelectOne}"/>
+                                            </h:selectOneMenu>
+                                            <h:outputLabel value="#{bundle.CreateKommentarLabel_datum}" for="datum" />
+                                            <h:inputText id="datum" value="#{kommentarController.selected.datum}" title="#{bundle.CreateKommentarTitle_datum}" >
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:inputText>
+                                            <h:outputLabel value="Kommentar" for="beschreibung" />
+                                            <h:inputText id="beschreibung" value="#{kommentarController.selected.beschreibung}" title="#{bundle.CreateKommentarTitle_beschreibung}" />
+                                            <h:outputLabel value="#{bundle.CreateKommentarLabel_autor}" for="autor" />
+                                            <h:selectOneMenu id="autor" value="#{kommentarController.selected.autor}" title="#{bundle.CreateKommentarTitle_autor}" >
+                                                <f:selectItems value="#{mitarbeiterController.itemsAvailableSelectOne}"/>
+                                            </h:selectOneMenu>
+                                        </h:panelGrid>
+                                        <br />
+                                        <h:commandLink action="#{kommentarController.create}" value="#{bundle.CreateKommentarSaveLink}" />
+                                    </h:form>
+                                </div>
+                            </h:column>
                         </h:dataTable>
+                        
                     </div>
                     
                     <h:outputText value="#{ideeController.pagination.pageFirstItem + 1}..#{ideeController.pagination.pageLastItem + 1}/#{ideeController.pagination.itemsCount}"/>&nbsp;
