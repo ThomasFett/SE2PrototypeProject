@@ -6,6 +6,9 @@ import jsfController.util.PaginationHelper;
 import dao.KommentarFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -26,7 +29,6 @@ public class KommentarController implements Serializable {
     private DataModel items = null;
     @EJB
     private dao.KommentarFacade ejbFacade;
-    private dao.BeitragFacade beitrag;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -56,7 +58,6 @@ public class KommentarController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    System.out.println("da");
                     return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
@@ -83,7 +84,11 @@ public class KommentarController implements Serializable {
 
     public String create() {
         try {
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            Date date = new Date();
+            current.setDatum(dateFormat.parse(dateFormat.format(date)));
             getFacade().create(current);
+            recreateModel();
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("KommentarCreated"));
             return prepareCreate();
         } catch (Exception e) {

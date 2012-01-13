@@ -29,7 +29,6 @@
             </div>
                 
             <div class="ideas">
-            <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
@@ -73,26 +72,26 @@
                             </h:column>
                             <h:column>
                                 <div class="createCommentForm">
-                                    <input type="hidden" name="commentId" value="#{item.id}" class="ideaId" />
+                                    <span class="ideaId" style="display:none;"><h:outputText value="#{item.id}" /></span>
                                     <h:form>
                                         <h:panelGrid columns="2">
                                             <h:outputLabel value="#{bundle.CreateKommentarLabel_beitrag}" for="beitrag" />
-                                            <h:selectOneMenu id="beitrag" value="#{kommentarController.selected.beitrag}" title="#{bundle.CreateKommentarTitle_beitrag}" >
+                                            <h:selectOneMenu id="beitrag" value="#{ideeController.kommentarSelected.beitrag}" title="#{bundle.CreateKommentarTitle_beitrag}" >
                                                 <f:selectItems value="#{beitragController.itemsAvailableSelectOne}"/>
                                             </h:selectOneMenu>
                                             <h:outputLabel value="#{bundle.CreateKommentarLabel_datum}" for="datum" />
-                                            <h:inputText id="datum" value="#{kommentarController.selected.datum}" title="#{bundle.CreateKommentarTitle_datum}" >
+                                            <h:inputText id="datum" value="#{ideeController.kommentarSelected.datum}" title="#{bundle.CreateKommentarTitle_datum}" >
                                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                                             </h:inputText>
                                             <h:outputLabel value="Kommentar" for="beschreibung" />
-                                            <h:inputText id="beschreibung" value="#{kommentarController.selected.beschreibung}" title="#{bundle.CreateKommentarTitle_beschreibung}" />
+                                            <h:inputText id="beschreibung" value="#{ideeController.kommentarSelected.beschreibung}" title="#{bundle.CreateKommentarTitle_beschreibung}" />
                                             <h:outputLabel value="#{bundle.CreateKommentarLabel_autor}" for="autor" />
-                                            <h:selectOneMenu id="autor" value="#{kommentarController.selected.autor}" title="#{bundle.CreateKommentarTitle_autor}" >
+                                            <h:selectOneMenu id="autor" value="#{ideeController.kommentarSelected.autor}" title="#{bundle.CreateKommentarTitle_autor}" >
                                                 <f:selectItems value="#{mitarbeiterController.itemsAvailableSelectOne}"/>
                                             </h:selectOneMenu>
                                         </h:panelGrid>
                                         <br />
-                                        <h:commandLink action="#{kommentarController.create}" value="#{bundle.CreateKommentarSaveLink}" />
+                                        <h:commandLink action="#{ideeController.createComment}" value="#{bundle.CreateKommentarSaveLink}" />
                                     </h:form>
                                 </div>
                             </h:column>
@@ -100,12 +99,9 @@
                         
                     </div>
                     
-                    <h:outputText value="#{ideeController.pagination.pageFirstItem + 1}..#{ideeController.pagination.pageLastItem + 1}/#{ideeController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{ideeController.previous}" value="#{bundle.Previous} #{ideeController.pagination.pageSize}" rendered="#{ideeController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{ideeController.next}" value="#{bundle.Next} #{ideeController.pagination.pageSize}" rendered="#{ideeController.pagination.hasNextPage}"/>&nbsp;
-                    
                 </h:panelGroup>
                 <br />
+            <h:form styleClass="jsfcrud_list_form">
                 <!-- <h:commandLink value="#{bundle.ListIdeeIndexLink}" action="/list" immediate="true" /> -->
             <h:commandLink value="zum Backend" action="/backend" immediate="true" />
             

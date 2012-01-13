@@ -31,9 +31,9 @@ public class IdeeController implements Serializable {
     private Idee current;
     private Kommentar comment;
     private DataModel items = null;
-    private DataModel kommentarItems = null;
     @EJB
     private dao.IdeeFacade ejbFacade;
+    @EJB
     private dao.KommentarFacade kommentarFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
@@ -48,10 +48,19 @@ public class IdeeController implements Serializable {
         }
         return current;
     }
+    public Kommentar getKommentarSelected() {
+        if (comment == null) {
+            comment = new Kommentar();
+            selectedItemIndex = -1;
+        }
+        return comment;
+    }
+    
 
     private IdeeFacade getFacade() {
         return ejbFacade;
     }
+    
     
     private KommentarFacade getKommentarFacade() {
         return kommentarFacade;
@@ -77,10 +86,12 @@ public class IdeeController implements Serializable {
 
     public String prepareList() {
         recreateModel();
+        System.out.println("prepareList");
         return "List";
     }
     
     public String prepareView() {
+        recreateModel();
         current = (Idee) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
@@ -89,6 +100,11 @@ public class IdeeController implements Serializable {
 
     public String prepareCreate() throws ParseException {
         current = new Idee();
+        selectedItemIndex = -1;
+        return "List";
+    }
+    public String prepareKommentarCreate() throws ParseException {
+        comment = new Kommentar();
         selectedItemIndex = -1;
         return "List";
     }
@@ -102,6 +118,23 @@ public class IdeeController implements Serializable {
             recreateModel();
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("IdeeCreated"));
             return prepareCreate();
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
+    }
+    public String createComment() {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            Date date = new Date();
+            getKommentarSelected().setDatum(dateFormat.parse(dateFormat.format(date)));
+            getKommentarFacade().create(getKommentarSelected());
+            prepareList();
+            recreateModel();
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("KommentarCreated"));
+            comment = new Kommentar();  
+            selectedItemIndex = -1;
+            return "List";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -174,14 +207,14 @@ public class IdeeController implements Serializable {
         if (items == null) {
             items = getPagination().createPageDataModel();
         }
-        return items;
+        return getPagination().createPageDataModel();
     }
     
     public Idee getCurrent() {
         return (Idee) getItems().getRowData();
     }
 
-    private void recreateModel() {
+    public void recreateModel() {
         items = null;
     }
 
@@ -241,33 +274,5 @@ public class IdeeController implements Serializable {
             }
         }
         
-    }
-    
-    public Kommentar getKommentar() {
-        comment = new Kommentar();
-        return comment;
-    }
-    
-    public String prepareKommentarCreate() {
-        comment = new Kommentar();
-        selectedItemIndex = -1;
-        return "List";
-    }
-    
-    public String createKommentar() {
-        try {
-            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-            Date date = new Date();
-            comment.setDatum(dateFormat.parse(dateFormat.format(date)));
-            getKommentarFacade().create(comment);
-            recreateModel();
-            current.getMyKommentare().add(comment);
-            getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("IdeeCreated"));
-            return prepareKommentarCreate();
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
-        }
     }
 }
