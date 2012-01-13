@@ -146,7 +146,7 @@ public class Beitrag implements Serializable {
     
     @Override
     public String toString(){
-        return "<b>schmuuu:</b> "+ getAutor() + getTitel();
+        return getAutor() + getTitel();
     }
     
     @Override

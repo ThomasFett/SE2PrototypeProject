@@ -62,23 +62,16 @@
                             <h:column>
                                 <div class="comments">
                                     
-                                    <h:outputText value="#{item.myKommentare}"/>
-                                    <c:if test="#{empty item.titel}">
-                                    JAAAA    
-                                    </c:if>
-                                    <h:outputText value="#{item.myKommentare}"/>
+                                    <ui:repeat value="${item.myKommentare}" var="comment">
+                                        <h3><h:outputText value="#{comment.titel}" /></h3>
+                                        <p class="kommentar-body">
+                                            <h:outputText value="#{comment.beschreibung}" />
+                                        </p>
+                                        <p class="kommentar-footer">
+                                            <h:outputText value="Von #{comment.autor} am #{comment.datum}" />
+                                        </p>
+                                    </ui:repeat>
                                     
-                                    <c:forEach var="a" items="#{item.myKommentare}">
-                                        <div class="kommentar">
-                                            <h1><h:outputText value="#{a.titel}" /></h1>
-                                            <p class="kommentar-body">
-                                                <h:outputText value="#{a.beschreibung}" />
-                                            </p>
-                                            <p class="kommentar-footer">
-                                                <h:outputText value="Von #{a.autor} am #{a.datum}" />
-                                            </p>
-                                        </div>
-                                    </c:forEach>
                                 </div>
                             </h:column>
                             

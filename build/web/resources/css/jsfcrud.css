@@ -128,3 +128,9 @@ tr.jsfcrud_even_row {
     font-weight: bold;
     width:80px;
 }
+
+.comments {
+    border-left: 1px solid;
+    margin: 0 0 0 50px;
+    padding: 0 0 0 10px;
+}
